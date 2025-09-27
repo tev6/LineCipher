@@ -1,4 +1,4 @@
-# WaveCipher - 文字线条化展示工具
+# LineCipher - 文字线条化展示工具
 ![](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![](https://img.shields.io/badge/C++-17-blue.svg)
 
