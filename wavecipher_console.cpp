@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const string chs = " etaoinsrhlcdumfpwgbyvkxjqz1234567890./>@:()!";
+const string chs = " etaoinsrhlcdumfpwgbyvkxjqz1234567890,./>@()!";
 vector<string> top(100), mid(100), bot(100);
 vector<int> vciphons;
 int tp = 0;
