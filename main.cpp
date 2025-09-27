@@ -1,3 +1,6 @@
+#define _DEBUG_ true // Print how all the corresponding characters to a part of cipher when it is true
+//#define _DEBUG_ false 
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -40,7 +43,7 @@ void dfs(int cur, int pre, int x, int max_x) {
     }
 }
 
-void drawVave(int num, int x) {
+void drawLine(int num, int x) {
     top[x] = mid[x] = bot[x] = "";
     string txt = to_string(num);
     for (char c : txt) {
@@ -55,10 +58,10 @@ void drawVave(int num, int x) {
         }
     }
     top[x] += ' '; mid[x] += ' '; bot[x] += '|';
-    cout<<top[x]<<endl<<mid[x]<<endl<<bot[x]<<endl;
+    if (_DEBUG_)cout<<top[x]<<endl<<mid[x]<<endl<<bot[x]<<endl;
 }
 
-char defineWave(const string& xtop, const string& xmid, const string& xbot) {
+char defineLine(const string& xtop, const string& xmid, const string& xbot) {
     for (int i = 0; i < 100; ++i) {
         if (top[i] == xtop && mid[i] == xmid && bot[i] == xbot) {
             return chs[i];
@@ -75,13 +78,13 @@ void generate() {
         vciphons.clear();
         dfs(0, 0, 0, max_x);
         for (int i = 0; i < tp; ++i) {
-            cout<<"index: "<<cnt<<"  character: "<<chs[cnt]<<endl;
-            drawVave(vciphons[i], cnt++);
+            if (_DEBUG_) cout<<"index: "<<cnt<<"  character: "<<chs[cnt]<<endl;
+            drawLine(vciphons[i], cnt++);
         }
     }
 }
 
-string str2wave(const string& input) {
+string str2line(const string& input) {
     string result_top, result_mid, result_bot;
     vector<int> index(input.size(), -1);
     for (size_t i = 0; i < input.size(); ++i) {
@@ -95,7 +98,7 @@ string str2wave(const string& input) {
     return result_top + "\b|\n" + result_mid + "\b|\n" + result_bot + '\n';
 }
 
-string wave2str(string& itop, string& imid, string& ibot) {
+string line2str(string& itop, string& imid, string& ibot) {
     itop[itop.size() - 1] = ' ';
     imid[imid.size() - 1] = ' ';
     string result;
@@ -107,7 +110,7 @@ string wave2str(string& itop, string& imid, string& ibot) {
     }
 
     for (size_t i = 0; i < sep.size() - 1; ++i) {
-        result += defineWave(itop.substr(sep[i] + 1, sep[i + 1] - sep[i]),
+        result += defineLine(itop.substr(sep[i] + 1, sep[i + 1] - sep[i]),
                              imid.substr(sep[i] + 1, sep[i + 1] - sep[i]),
                              ibot.substr(sep[i] + 1, sep[i + 1] - sep[i]));
     }
@@ -119,7 +122,7 @@ int main() {
     generate();
 
     while (true) {
-        cout << "Choose one of the following options:\n  1. string 2 wave\n  2. wave 2 string\n  3. exit\n\nInput(1/2): ";
+        cout << "Choose one of the following options:\n  1. string to line\n  2. line to string\n  3. exit\n\nInput(1-3): ";
         int opt;
         cin >> opt;
         if (opt == 1) {
@@ -127,16 +130,16 @@ int main() {
             cout << "input a string: ";
             cin.ignore();
             getline(cin, input);
-            cout << str2wave(input)<<endl<<"Press enter to choose again";
+            cout << str2line(input)<<endl<<"Press enter to choose again";
             cin.get();
         } else if (opt == 2) {
             string itop, imid, ibot;
-            cout << "Input the wavecipher text: \n\n";
+            cout << "Input the linecipher text: \n\n";
             cin.ignore();
             getline(cin, itop);
             getline(cin, imid);
             getline(cin, ibot);
-            cout << "Output: " << wave2str(itop, imid, ibot)<<endl<<"Press enter to choose again";
+            cout << "Output: " << line2str(itop, imid, ibot)<<endl<<"Press enter to choose again";
             cin.get();
         } else if (opt == 3) exit(0);
         else continue;
@@ -144,4 +147,3 @@ int main() {
 
     return 0;
 }
-
