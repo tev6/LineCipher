@@ -21,10 +21,10 @@ git clone https://github.com/tev6/LineCipher.git
 cd wavecipher
 
 # 编译程序
-g++ -o wavecipher main.cpp -std=c++11
+g++ -o linecipher main.cpp -std=c++11
 
 # 运行程序
-./wavecipher
+./linecipher
 ```
 ## 📖 使用方法
 程序提供两种操作模式：
