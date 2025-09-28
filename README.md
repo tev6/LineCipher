@@ -17,7 +17,7 @@
 ### 编译运行
 ```bash
 # 克隆项目
-git clone https://github.com/yourusername/wavecipher.git
+git clone https://github.com/tev6/LineCipher.git
 cd wavecipher
 
 # 编译程序
