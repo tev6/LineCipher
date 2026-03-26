@@ -18,7 +18,7 @@
 ```bash
 # 克隆项目
 git clone https://github.com/tev6/LineCipher.git
-cd wavecipher
+cd LineCipher
 
 # 编译程序
 g++ -o linecipher main.cpp -std=c++11
@@ -26,8 +26,54 @@ g++ -o linecipher main.cpp -std=c++11
 # 运行程序
 ./linecipher
 ```
+
+### 三种语言调用/测试
+
+#### 1) C++（库调用）
+项目提供可复用头文件 [linecipher.h](file:///z:/LineCipher/linecipher.h)，包含初始化、编码、解码接口：
+
+```cpp
+#include <iostream>
+#include <sstream>
+#include <string>
+#include "linecipher.h"
+
+int main() {
+    linecipher::init();
+    std::string text = "hello!";
+    std::string encoded = linecipher::encode(text);
+    std::cout << encoded << std::endl;
+
+    std::istringstream iss(encoded);
+    std::string top, mid, bot;
+    std::getline(iss, top);
+    std::getline(iss, mid);
+    std::getline(iss, bot);
+    std::cout << linecipher::decode(top, mid, bot) << std::endl;
+}
+```
+
+示例程序：[test.cpp](file:///z:/LineCipher/test.cpp)
+
+#### 2) Python（库调用）
+提供纯 Python 实现：[linecipher.py](file:///z:/LineCipher/linecipher.py)
+
+```bash
+python test.py
+```
+
+示例程序：[test.py](file:///z:/LineCipher/test.py)
+
+#### 3) HTML + JavaScript（单文件网页）
+打开 [linecipher.html](file:///z:/LineCipher/linecipher.html)，页面中间卡片式输入框，选择“编码/解码”后点击运行即可。
+
+如果需要本地预览服务器（可选）：
+```bash
+python -m http.server 8000
+```
 ## 📖 使用方法
 程序提供两种操作模式：
+
 
 1. 文本转线条模式
 输入文本字符串，程序会生成对应的三行线条图案：
@@ -65,8 +111,13 @@ g++ -o linecipher main.cpp -std=c++11
 ```
 ## 📁 项目结构
 ```text
-wavecipher/
+LineCipher/
 ├── main.cpp
+├── linecipher.h
+├── test.cpp
+├── linecipher.py
+├── test.py
+├── linecipher.html
 ├── README.md
 ```
 ## 💡 使用场景
